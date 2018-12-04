@@ -57,7 +57,7 @@ class ApiController extends Controller {
         //try{
             unset($data['coupon_sn']);
             M("boc_order")->where("coupon_sn='".$this->urlsafe_b64encode(trim($coupon_sn))."'")->save($data);
-            if($status==1 &&  ($orderInfo['platform']=="C20122" || $orderInfo['platform']=="C20130"))
+            if($status==1 &&  ($orderInfo['platform']=="C20122" || $orderInfo['platform']=="C20130"  || $orderInfo['platform']=='C200866'))
             {
                 $json_array=array(
                     "waresId"=> "WSHHY".$orderInfo['boc_goods_id'],
