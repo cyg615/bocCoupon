@@ -1,0 +1,117 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2><present name="data">[ {$data.title} ] 子</present>导入卡券 </h2>
+    </div>
+    <div>
+     <form action="/index.php?s=/Admin/virtualcard/import" onSubmit="return closebut()" method="post" enctype="multipart/form-data">
+        <input type="file" name="uploadfile"/>
+        <input type="hidden" name="table" value="tablename"/>
+        <input type="hidden" name="opmode" value="import"/>
+         
+        <input type="submit" id="aa" value="上传"/>
+        <!--<br/>
+        使用截止时间：<input  type="text" id="datetimeEnd" name="datetimeEnd"  class="form_datetime"  value="<?php echo date('Y-m-d',strtotime("1 month"))?>" />-->
+        <br/>
+        商品编号：<input  type="text" id="keyword" name="keyword" /> 
+        批次号：<input  type="text" id="batchNo" name="batchNo" /> 
+        <div id="searchBox" style="display: none"></div> 
+    </form>
+    <br>
+    <div>*为了保证数据顺利导入，请确保Excel表格中最多500行数据。</div>
+    <div>*如果券号重复，则无法导入。</div>
+    <div><a href="/virtualCard_import_model.xls" target="_blank">模板(virtualCard_import_model.xls)</a></div>
+    </div>
+  
+
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+	
+	var xhr = null;
+        $('#keyword').keyup(function() {
+            if (xhr) {
+                xhr.abort(); //如果存在ajax的请求，就放弃请求  
+            }
+            var inputText = $.trim(this.value);
+            if (inputText != "") { //检测键盘输入的内容是否为空，为空就不发出请求  
+                xhr = $.ajax({
+                    type: 'post',
+					//url:'/index.php?s=/Admin/virtualcard/ajax_get_goods_name',
+					url:"{:U('/Admin/virtualcard/ajax_get_goods_name')}",
+                    cache: false,
+                    //不从浏览器缓存中加载请求信息  
+                    data: "keyword=" + inputText,
+                    //向服务器端发送的数据  
+                    dataType: 'json',
+                    //服务器返回数据的类型为json  
+                    success: function(json) {
+                       // if (json.length != 0) { //检测返回的结果是否为空
+					   if(!isNull(json)){  
+                            var lists = "<ul class='search_ul'>";
+                            $.each(json,
+                            function() {
+                                lists += "<li class='search_li'>" + this.name + "</li>"; //遍历出每一条返回的数据  
+                            });
+                            lists += "</ul>";
+                            $("#searchBox").html(lists).show(); //将搜索到的结果展示出来
+                           // $('li').live('click',function(){
+								$('.search_ul').on('click', '.search_li', function(){
+                                //$(".zhuce_gongsimingcheng").val($(this).text()); //点击某个li就会获取当前的值
+                                $("#keyword").val($(this).text()); //点击某个li就会获取当前的值
+								$("#searchBox").hide();
+                            });
+                        } else {
+                            $("#searchBox").hide();
+                        }
+                    }
+                });
+            } else {
+                $("#searchBox").hide(); //没有查询结果就隐藏搜索框
+            }
+        });
+  
+  $("#datetimeStart").datetimepicker({
+    format: 'yyyy-mm-dd',
+    minView:'month',
+    language: 'zh-CN',
+    autoclose:true,
+    startDate:new Date()
+  }).on("click",function(){
+    $("#datetimeStart").datetimepicker("setEndDate",$("#datetimeEnd").val())
+  });
+  $("#datetimeEnd").datetimepicker({
+    format: 'yyyy-mm-dd',
+    minView:'month',
+    language: 'zh-CN',
+    autoclose:true,
+    startDate:new Date()
+  }).on("click",function(){
+    $("#datetimeEnd").datetimepicker("setStartDate",$("#datetimeStart".val()))
+  });
+  
+  function closebut()
+  {
+	  var enddate=$('#datetimeEnd').val();
+	  var keyword=$('#keyword').val();
+	  if(enddate=='')
+	  {
+		  alert("请选择卡券使用截止时间");
+		  return false;
+	  }
+	   if(keyword=='')
+	  {
+		  alert("请输入商品名称");
+		  return false;
+	  }
+	  return true;
+  }
+  
+  function isNull(data){ 
+   return (data == "" || data == undefined || data == null) ? true : false; 
+  }
+
+    </script>
+</block>

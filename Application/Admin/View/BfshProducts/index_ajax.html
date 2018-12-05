@@ -1,0 +1,43 @@
+<table id="users" class="table table-bordered table-hover table-striped">
+
+    <thead>
+        <tr>
+            <th><input class="check-all" type="checkbox"/></th>
+                    <th>商品编号</th>
+                    <th>商品名</th>
+					<th>商品类型</th>
+					<th>售价</th>
+                    <th>兑换积分值</th>
+					<th>上传中行数量</th>
+                    <th>状态</th>
+                    <th>添加时间</th>
+                   
+            <!--<th>操作</th>-->
+        </tr>
+    </thead>
+    <tbody>
+<notempty name="datas">
+	<volist name="datas" id="vo">
+	<tr>
+	                <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+					<td>{$vo.sequence}</td>
+                    <td>{$vo.name}</td>
+					<td><if condition="$vo.type eq 1">现金券<else/>积分券</if></td>
+					<td>{$vo.price}</td>
+                    <td>{$vo.integral}</td>
+                    <td>{$vo.stock}</td>
+                    <td><if condition="$vo.status eq 1">可用<else/>不可用</if></td>
+					<td>{$vo.ctime}</a></td>
+                   
+                    
+	</tr>
+	</volist>
+<else/>
+	<tr><td colspan="100" class="text-center">没有查询到数据！</td><tr>
+</notempty>
+<notempty name="page">
+	<tr><td colspan="100" class="text-right">{$page}</td><tr>
+</notempty>
+    </tbody>
+</table>
+

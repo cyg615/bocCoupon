@@ -1,0 +1,42 @@
+<table id="virtualcard" class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+          <th><input class="check-all" type="checkbox"/></th>
+		  <th style="width:300px;">卡券号</th>
+		  <th>商品名</th>
+		  <th>使用订单号</th>
+		  <th>到期时间</th>
+          <th>状态</th>
+          <!--<th>操作</th>-->
+        </tr>
+    </thead>
+    <tbody>
+<notempty name="datas">
+	<volist name="datas" id="vo">
+	<tr>
+      
+                    <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+					<td>{$vo.coupon}</td>
+					<td>{$vo.name}</td>
+					<td>{$vo.order_id}</td>
+					<td>{$vo.expire|date='Y-m-d H:i:s',###}</a></td>
+					<td><if condition="$vo.cstatus eq 1">可用<elseif condition="$vo.cstatus eq -1"/>不可用<else/>已购买</if></td>
+		<!--<td>
+		    <span class="btn btn-xs btn-primary mySave" data-toggle="modal" data-id="{$vo.id}" data-url="{:U('/Admin/Role/update')}"><span class="glyphicon glyphicon-edit margin-r-2" aria-hidden="true"></span>修改</span>
+		   <a class="confirm ajax-get btn btn-xs btn-primary" href="{:U('/Admin/Role/del',array('id'=>$vo['id']))}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;删除</a>
+		</td>-->
+	</tr>
+	</volist>
+<else/>
+	<tr><td colspan="100" class="text-center">没有查询到数据！</td><tr>
+</notempty>
+<notempty name="page">
+	<tr><td colspan="100" class="text-right">{$page}</td><tr>
+</notempty>
+    </tbody>
+</table>
+<script type="text/javascript">
+$('#virtualcard').on('click','.check-all',function(){
+	$("input[name='id[]']:checkbox").prop("checked", this.checked); 
+});
+</script>

@@ -1,0 +1,50 @@
+<table id="users" class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <!--<th><input class="check-all" type="checkbox"/></th>-->
+                    <th>项目名称</th>
+					<th>城市名称</th>
+                    <th>区域别名</th>
+					<th>场馆名称</th>
+					<th style="width:20%">地址</th>
+                    <th>电话</th>
+                    <th>优惠价格</th>
+                    <th>最低价</th>
+                    <th>是否可定</th>
+                    <th>最小起订时间</th>
+                    <th>推荐首页</th>
+                    <th>更新时间</th>
+            <!--<th>操作</th>-->
+        </tr>
+    </thead>
+    <tbody>
+<notempty name="datas">
+	<volist name="datas" id="vo">
+	<tr>
+	    <!--<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>-->
+			<td>{$vo.cat_name}</td>
+					<td>{$vo.city_name}</td>
+                    <td>{$vo.region_name}</td>
+					<td>{$vo.alias_region}</td>            
+                    <td>{$vo.venues_address}</td>
+                    <td>{$vo.venues_phone}</td>
+					<td>{$vo.venues_promote_price}</td>
+                    <td>{$vo.venues_low_price}</td>
+                    <td><if condition="$vo.venues_avaliable eq 1">可用<elseif condition="$vo.venues_avaliable eq -1"/>不可用<else/>已订满</if></td>
+                    <td>{$vo.min_hour}</td>
+                    <td><if condition="$vo.is_show_index eq 1">是<else/>否</if></td>
+                    <th>{$vo.update_time}</th>
+		<!--<td>
+		    <span class="btn btn-xs btn-primary mySave" data-toggle="modal" data-id="{$vo.id}" data-url="{:U('/Admin/Role/update')}"><span class="glyphicon glyphicon-edit margin-r-2" aria-hidden="true"></span>修改</span>
+		   <a class="confirm ajax-get btn btn-xs btn-primary" href="{:U('/Admin/Role/del',array('id'=>$vo['id']))}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;删除</a>
+		</td>-->
+	</tr>
+	</volist>
+<else/>
+	<tr><td colspan="100" class="text-center">没有查询到数据！</td><tr>
+</notempty>
+<notempty name="page">
+	<tr><td colspan="100" class="text-right">{$page}</td><tr>
+</notempty>
+    </tbody>
+</table>

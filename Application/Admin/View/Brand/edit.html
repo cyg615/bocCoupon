@@ -1,0 +1,116 @@
+<extend name="Public/base" />
+
+<extend name="Layout/ins_page" />
+ <link href="/sap/demo.css" rel="stylesheet" type="text/css" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2><if condition="$brand.id gt 0">更新品牌<else/>添加品牌</if></h2>     
+	</div>
+    
+	<div class="wrapper wrapper-content">
+					
+	<!--<div class="page-header">
+</div>-->	<form method="post" id="form_data" class="well form-horizontal" action="/index.php?s=/Admin/brand/editing" onsubmit="check_form(this)">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="name">品牌名：</label>
+			<div class="col-sm-4">
+				<input class="form-control" id="name" name="name" check="require" msg="请输入商品名称" type="text" value="{$brand.brand_name}"/>
+			</div>
+		</div>
+        <div class="form-group">
+			<label class="col-sm-2 control-label" for="name">图片：</label>
+			<div class="col-sm-4">
+				<img id="simg" class="group-picture" width="100px" height="100px" src="{$brand.brand_img}" alt="商品图片" ><br>  
+		        	<a href="javascript:;" class="a-upload" onClick="$('#group-picture').click()" > 选择 </a>
+		            <input type="file" id='group-picture' name="group-picture" id="group-picture" style="display: none;">  
+		  			<input  name="pic_url" id='logo-input' type="hidden"  value="{$brand.brand_img}"/> 
+			</div>
+		</div>
+        
+        <div class="form-group">
+			<label class="col-sm-2 control-label" for="company">品牌描述：</label>
+			<div class="col-sm-4">
+				<input class="form-control" id="brand_desc" name="brand_desc" type="text"  value="{$brand.brand_desc}"/>
+			</div>
+		</div>
+        
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="company">网站主页：</label>
+			<div class="col-sm-4">
+				<input class="form-control" id="site_url" name="site_url" type="text"  value="{$brand.site_url}"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="action col-sm-6 col-sm-offset-2">
+                <input type="hidden" name="id" id="id" value="{$brand.id}" />
+				<input class="btn btn-sm btn-primary" value="保存" type="submit" type="button">
+			</div>
+		</div>
+	</form>
+
+				</div>
+</block>
+
+<block name="script">
+ <script type="text/javascript">
+ function check_form(frm)
+{
+	  var name=$("input[name='name']").val();
+	  var sequence=$("input[name='sequence']").val();
+	  if (name.length <1)
+	  {
+		 msg += "商品名称不能为空" + '\n';
+	  }
+	  if (sequence.length < 1)
+	  {
+		msg += "商品编号不能为空"+ '\n'
+	  }
+	  if (msg.length > 0)
+	  {
+		alert(msg);
+		return false;
+	  }
+	  else
+	  {
+		frm.submit();
+		return true;
+	  }
+}
+$(function(){
+            $("#group-picture").change(function(event) {
+                var img=event.target.files[0];
+                if(!img){
+                    return false;
+                }
+                if(!(img.type.indexOf('image')==0 && img.type && /\.(?:jpg|png|gif)$/.test(img.name)) ){
+                    gritter('图片只能是jpg,gif,png');
+                    return false;
+                }
+                var reader = new FileReader();
+                reader.readAsDataURL(img);
+                reader.onload = function(e){
+                     $.post("/upload.php", {from:'brand',imga:e.target.result},function(ret){
+                        if(ret.img!=''){
+                            console.log('upload success');
+                            document.getElementById('simg').src = ret.picUrl;
+                            //mini.get('logo-input').setValue(ret.picUrl);
+							$("#logo-input").val(ret.picUrl);
+
+                        }else{
+                            console.log('upload fail');
+                        }
+                    },'json');
+                }
+            });
+        });
+</script>
+</block>
+<block name="css">
+<style type="text/css">
+.col-sm-1 {
+    width:auto;
+}
+</style>
+</block>

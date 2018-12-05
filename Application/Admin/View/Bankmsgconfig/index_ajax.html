@@ -1,0 +1,34 @@
+<table id="users" class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <!--<th><input class="check-all" type="checkbox"/></th>-->
+                    <th>银行商城平台名称</th>
+                    <th>sap对应编码</th>
+					<th>发送短信</th>
+					
+            <!--<th>操作</th>-->
+        </tr>
+    </thead>
+    <tbody>
+<notempty name="datas">
+	<volist name="datas" id="vo">
+	<tr>
+	    <!--<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>-->
+					<td>{$vo.bank_name}</td>
+                    <td>{$vo.bank_sap_code}</td>
+                    <td><if condition="$vo.enable eq 1">启用<else/>不启用</if></td>
+                    <th><a href="{:U('/Admin/bankmsgconfig/edit',array('id'=>$vo['id']))}" >编辑</a></th>
+		<!--<td>
+		    <span class="btn btn-xs btn-primary mySave" data-toggle="modal" data-id="{$vo.id}" data-url="{:U('/Admin/Role/update')}"><span class="glyphicon glyphicon-edit margin-r-2" aria-hidden="true"></span>修改</span>
+		   <a class="confirm ajax-get btn btn-xs btn-primary" href="{:U('/Admin/Role/del',array('id'=>$vo['id']))}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;删除</a>
+		</td>-->
+	</tr>
+	</volist>
+<else/>
+	<tr><td colspan="100" class="text-center">没有查询到数据！</td><tr>
+</notempty>
+<notempty name="page">
+	<tr><td colspan="100" class="text-right">{$page}</td><tr>
+</notempty>
+    </tbody>
+</table>

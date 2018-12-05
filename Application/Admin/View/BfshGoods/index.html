@@ -1,0 +1,262 @@
+<extend name="Public/base" />
+
+<extend name="Layout/ins_page" />
+ <link href="/sap/demo.css" rel="stylesheet" type="text/css" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>用户列表</h2>
+	</div>
+  <form class="navbar-form" role="search" id="search-form">
+	<div class="form-group">
+		商品名：<input class="form-control" name="name" type="text">
+        商品编号：<input class="form-control" name="sequence" type="text">
+        状态：<select name="status" class="form-control">
+                             <option  value="">请选择</option>
+                             <option  value=1> 可用</option>
+                             <option value=-1> 不可用</option>
+                             
+                             </select>
+        类型：<select name="type" class="form-control">
+                             <option  value="">请选择</option>
+                             <option  value=1>存券</option>
+                             <option value=2>直充</option>
+                             
+                             </select>                     
+	</div>
+	<button type="button" onclick="ajax_show('ajax-page',1)" style="float:right;" class="btn btn-primary" id="my-search"><span class="glyphicon glyphicon-glass margin-r-2" aria-hidden="true"></span>查询</button>
+    <button id="showDialog"  type="button"  style="float:right;" class="btn btn-primary">生成采购单</button>
+</form>
+  <div id="ajax-page">
+        {:W('Ext/renderPartial',array('data'=>array('partial'=>'index_ajax','data'=>$datas,'page'=>$page)))}
+</div>
+
+  <!-- 模态框（Modal） -->
+<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:block">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					模态框（Modal）标题
+				</h4>
+			</div>
+			<div class="modal-body">
+				在这里添加一些文本
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					提交更改
+				</button>
+			</div>
+		</div>
+	</div>
+</div>-->
+  
+<div id="dialog1">  
+    <div id="Data"></div>  
+</div>  
+
+  
+</block>
+
+
+
+
+<block name="script">
+    <script type="text/javascript">
+		$("#datetimeStart").datetimepicker({
+    format: 'yyyy-mm-dd',
+    minView:'month',
+    language: 'zh-CN',
+    autoclose:true,
+    startDate:new Date()
+  }).on("click",function(){
+    $("#datetimeStart").datetimepicker("setEndDate",$("#datetimeEnd").val())
+  });
+  $("#datetimeEnd").datetimepicker({
+    format: 'yyyy-mm-dd',
+    minView:'month',
+    language: 'zh-CN',
+    autoclose:true,
+    startDate:new Date()
+  }).on("click",function(){
+    $("#datetimeEnd").datetimepicker("setStartDate",$("#datetimeStart".val()))
+  });
+    
+  
+  //ajax分页查询
+function ajax_show(id,pgae){
+	var sequence=$("input[name='sequence']").val();
+	var name=$("input[name='name']").val();
+	var status=$("select[name='status']").val();
+	var type=$("select[name='type']").val();
+	$.ajax({
+		url:"{:U('/Admin/BfshGoods/index')}",
+		type:"post",
+		async:false,
+		dataType:"text",
+		data:{'p':pgae,'name':name,'sequence':sequence,'status':status,'type':type},
+		success:function(data){
+		$("#"+id).html(data);
+		},
+		error:function(data){
+		console.log(data);
+		}
+		});
+}
+
+function editStock(product_id) {
+          	$.ajax({
+
+                url: "{:U('/Admin/goods/boc')}",
+                type:"post",
+		        async:false,
+		        dataType:"text",
+		       data:"",
+		       success:function(data){
+
+                }
+            }); 
+
+        }
+
+    </script>
+    <script type="text/javascript">
+	$(function(){  
+    $("#dialog1").dialog({  
+        autoOpen:false,//该选项默认是true，设置为false则需要事件触发才能弹出对话框  
+        title:'采购单列表',//对话框的标题  
+        width:480,//默认是300 
+		zIndex: 240, 
+        modal:true,//设置为模态对话框 
+		//url: "{:U('/Admin/goods/get_goods_info')}"
+		 
+    });  
+    $("#showDialog").click(function(){  
+	    var chk_value =[]; 
+        $('input[name="id[]"]:checked').each(function(){ 
+          chk_value.push($(this).val()); 
+        }); 
+		if(chk_value.length==0)
+		{
+			alert('请选择要上传的商品');
+			return false;
+		}
+		var ids= chk_value.join(",");
+        getData(ids);//获取json数据*/
+		 
+        $("#dialog1").dialog('open');//设置为‘open’时将显示对话框  
+    });  
+	});
+	
+	
+    function getData(ids){ 
+	    $("#Data").empty();
+		
+        
+		
+		 $.ajax({
+                            url: "{:U('/Admin/goods/get_goods_info')}",
+                            type: "post",
+                            data: {ids:ids},
+                            dataType: 'json',
+                            success: function (data) {
+								if(data.state=200)
+								{
+									var goodsList=data.goodsList;
+									var action="{:U('/Admin/bocvirtualcard/export')}";
+									 strHTML="<form action='"+action+"' id='goodsForm'>";
+									 strHTML += "<table class='table table-bordered table-hover table-striped'><tr><th>商品名称</th><th>类型</th><th>数量</th></tr>"; 
+									for(var i=0; i<goodsList.length; i++) 
+									 {  
+									
+		                       
+                                        strHTML += "<tr><td>"+goodsList[i].name+"</td><td>"+goodsList[i].goods_type+"</td><td><input type='text' name='num[]' /><input type='hidden' name='goods[]' value="+JSON.stringify(goodsList[i])+"/></td></tr>"; 
+				                   
+		                           
+									 }  
+									 
+									  strHTML += "<tr><td colspan='3'><select name='platform' class='form-control'>";
+									  strHTML += "<option  value='' >请请选择平台</option>";
+                                      strHTML += "<option  value='C20122' >中行缤纷生活</option>";
+                                      strHTML += "<option  value='C20130'>中行上海分行电子券项目</option>";
+                                      strHTML += "</select></td></tr>"; 
+									  strHTML += "<td colspan='3'><input type='button' name='submit_goods' id='submit_goods'  value='提交' /></td>"; 
+									  strHTML += "</tr></table>"; 
+									  strHTML +="</form>";
+									  $("#Data").html(strHTML);//显示到tbody中*/ 
+								}
+								
+								/*alert(ids);return false;
+								var strHTML='';
+		                            strHTML += "<tr>";  
+                                    strHTML += "<td>9999</td>"; 
+				                    strHTML += "</tr>";  
+		                            $("#Data").html(strHTML);//显示到tbody中*/ 
+                        
+                            }
+            });
+        /*$.getJSON("UserInfo.json",function(data){  
+            $("#Data").empty();//先清空tbody  
+            var strHTML = "";  
+            $.each(data,function(InfoIndex,Info){//遍历json里的数据  
+                strHTML += "<tr>";  
+                strHTML += "<td>"+Info["name"]+"</td>";  
+                strHTML += "<td>"+Info["sex"]+"</td>";  
+                strHTML += "<td>"+Info["years"]+"</td>";  
+                strHTML += "<td>"+Info["email"]+"</td>";  
+                strHTML += "</tr>";  
+            });  
+            $("#Data").html(strHTML);//显示到tbody中  
+        });  */
+    }  
+	
+	
+	  function submit_goods()
+	  {
+		  alert("1111");
+		  //$("#Data").action="{:U('/Admin/bocvirtualcard/export')}";
+		  //$("#Data").submit();
+	  }
+	  $(document).on('click',"#submit_goods",function(){
+		  //$("#goodsForm").submit();
+		  var platform=$('select[name="platform"]').val();
+		  var nums =[]; 
+		  var goods=[];
+		  $('input[name="num[]"]').each(function(){ 
+           nums.push($(this).val()); 
+          }); 
+		  
+		  $('input[name="goods[]"]').each(function(){ 
+           goods.push($(this).val()); 
+          });
+		  var numList= nums.join("||");
+		  var goodList=goods.join("||");
+		   $.ajax({
+                            url: "{:U('/Admin/bocvirtualcard/export')}",
+                            type: "post",
+                            data: {numList:numList,goodList:goodList,platform:platform},
+                            dataType: 'json',
+                            success: function (data)
+							{
+								if(data.status=200)
+								{
+									alert("上传成功。本次共上传"+data.count+"张卡券");
+								}else{
+									alert(data.msg);
+								}
+							}
+			});
+	
+      });
+	  
+	</script>
+</block>
+
+

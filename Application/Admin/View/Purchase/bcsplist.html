@@ -1,0 +1,209 @@
+<extend name="Public/base" />
+
+<extend name="Layout/ins_page" />
+ <link href="/sap/demo.css" rel="stylesheet" type="text/css" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>用户列表</h2>
+	</div>
+  <!--<form class="navbar-form" role="search" id="search-form">
+	<div class="form-group">
+		商品名：<input class="form-control" name="name" type="text">
+        商品编号：<input class="form-control" name="sequence" type="text">
+        状态：<select name="status" class="form-control">
+                             <option  value="">请选择</option>
+                             <option  value=1> 可用</option>
+                             <option value=-1> 不可用</option>
+                             
+                             </select>
+        类型：<select name="type" class="form-control">
+                             <option  value="">请选择</option>
+                             <option  value=1>存券</option>
+                             <option value=2>直充</option>
+                             
+                             </select>                     
+	</div>
+	<button type="button" onclick="ajax_show('ajax-page',1)" style="float:right;" class="btn btn-primary" id="my-search"><span class="glyphicon glyphicon-glass margin-r-2" aria-hidden="true"></span>查询</button>
+    <button id="showDialog"  type="button"  style="float:right;" class="btn btn-primary">上传银行</button>
+</form>-->
+  <div id="ajax-page">
+        {:W('Ext/renderPartial',array('data'=>array('partial'=>'bcsp_ajax','data'=>$datas,'page'=>$page)))}
+</div>
+
+  <!-- 模态框（Modal） -->
+<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:block">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					模态框（Modal）标题
+				</h4>
+			</div>
+			<div class="modal-body">
+				在这里添加一些文本
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					提交更改
+				</button>
+			</div>
+		</div>
+	</div>
+</div>-->
+  
+  <div id="dialog">  
+    <div id="DataList"></div>
+    
+    
+</div>  
+
+
+  
+</block>
+
+
+
+
+<block name="script">
+    <script type="text/javascript">
+		$("#datetimeStart").datetimepicker({
+    format: 'yyyy-mm-dd',
+    minView:'month',
+    language: 'zh-CN',
+    autoclose:true,
+    startDate:new Date()
+  }).on("click",function(){
+    $("#datetimeStart").datetimepicker("setEndDate",$("#datetimeEnd").val())
+  });
+  $("#datetimeEnd").datetimepicker({
+    format: 'yyyy-mm-dd',
+    minView:'month',
+    language: 'zh-CN',
+    autoclose:true,
+    startDate:new Date()
+  }).on("click",function(){
+    $("#datetimeEnd").datetimepicker("setStartDate",$("#datetimeStart".val()))
+  });
+    
+  
+  //ajax分页查询
+function ajax_show(id,pgae){
+	var sequence=$("input[name='sequence']").val();
+	var name=$("input[name='name']").val();
+	var status=$("select[name='status']").val();
+	var type=$("select[name='type']").val();
+	$.ajax({
+		url:"{:U('/Admin/goods/index')}",
+		type:"post",
+		async:false,
+		dataType:"text",
+		data:{'p':pgae,'name':name,'sequence':sequence,'status':status,'type':type},
+		success:function(data){
+		$("#"+id).html(data);
+		},
+		error:function(data){
+		console.log(data);
+		}
+		});
+}
+
+function editStock(product_id) {
+          	$.ajax({
+
+                url: "{:U('/Admin/goods/boc')}",
+                type:"post",
+		        async:false,
+		        dataType:"text",
+		       data:"",
+		       success:function(data){
+
+                }
+            }); 
+
+        }
+
+    </script>
+    <script type="text/javascript">
+	$(function(){  
+    $("#dialog").dialog({  
+        autoOpen:false,//该选项默认是true，设置为false则需要事件触发才能弹出对话框  
+        title:'批次详情',//对话框的标题  
+        width:480,//默认是300 
+		zIndex: 240, 
+        modal:true//设置为模态对话框 
+		 
+    });  
+	
+	$(document).on('click',".btn_show",function(){
+    //$(".btn_show").click(function(){  
+	    
+	    var batchNo=$(this).attr('batchNO');
+        getData(batchNo);//获取json数据  
+        $("#dialog").dialog('open');//设置为‘open’时将显示对话框  
+    });  
+	 
+	});
+	
+	
+    function getData(batchNo){ 
+	    $("#DataList").empty();
+		
+        
+		
+		 $.ajax({
+                            url: "{:U('/Admin/Purchase/batchDetail')}",
+                            type: "post",
+                            data: {batchNo:batchNo},
+                            dataType: 'json',
+                            success: function (data) {
+								if(data.state=200)
+								{
+									 var goodsList=data.list;
+									
+									 strHTML= "<table class='table table-bordered table-hover table-striped'><tr><th>商品名称</th><th>商品编码</th><th>类型</th><th>数量</th></tr>"; 
+									for(var i=0; i<goodsList.length; i++) 
+									 {  
+									
+		                       
+                                        strHTML += "<tr><td>"+goodsList[i]['goods']['name']+"</td><td>"+goodsList[i]['goods']['sequence']+"</td><td>"+goodsList[i]['goods']['goods_type']+"</td><td>"+goodsList[i]['count']+"</td></tr>"; 
+				                   
+		                           
+									 }  
+									  $("#DataList").html(strHTML);//显示到tbody中*/ 
+								}
+								
+								/*alert(ids);return false;
+								var strHTML='';
+		                            strHTML += "<tr>";  
+                                    strHTML += "<td>9999</td>"; 
+				                    strHTML += "</tr>";  
+		                            $("#Data").html(strHTML);//显示到tbody中*/ 
+                        
+                            }
+            });
+        /*$.getJSON("UserInfo.json",function(data){  
+            $("#Data").empty();//先清空tbody  
+            var strHTML = "";  
+            $.each(data,function(InfoIndex,Info){//遍历json里的数据  
+                strHTML += "<tr>";  
+                strHTML += "<td>"+Info["name"]+"</td>";  
+                strHTML += "<td>"+Info["sex"]+"</td>";  
+                strHTML += "<td>"+Info["years"]+"</td>";  
+                strHTML += "<td>"+Info["email"]+"</td>";  
+                strHTML += "</tr>";  
+            });  
+            $("#Data").html(strHTML);//显示到tbody中  
+        });  */
+    }  
+	 
+	</script>
+</block>
+
+

@@ -1,0 +1,138 @@
+<extend name="Public/base" />
+<extend name="Layout/ins_page" />
+ <link href="/sap/demo.css" rel="stylesheet" type="text/css" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>订单列表</h2>
+	</div>
+   
+    <div class="f1">
+    <form class="form-horizontal" role="form" action="/index.php?s=/Admin/goods/index" method="post">
+                 
+                        <!--<legend>配置数据源</legend>-->
+                       <div class="form-group">
+                          <label class="col-sm-1 control-label" for="ds_host" style="width:auto;">订单号</label>
+                          <div class="col-sm-2">
+                             <input class="form-control" id="name" name="name" type="text"  value="<?php echo I('post.name'); ?>"/>
+                          </div>
+                          <label class="col-sm-1 control-label" for="ds_name" style="width:auto;"  >商品编号</label>
+                          <div class="col-sm-2">
+                             <input class="form-control" id="sequence" name="sequence" type="text" value="<?php echo I('post.sequence'); ?>" />
+                          </div>
+                          
+                           <label class="col-sm-1 control-label" for="ds_host" style="width:auto;">状态</label>
+                          <div class="col-sm-2">
+                             <!--<input class="form-control" id="ds_host" type="text" />-->
+                             <select name="status">
+                             <option  value="1" <?php if(I('post.status')==1){?>selected<?php } ?>> 可用</option>
+                             <option value="-1" <?php if(I('post.status')==-1){?>selected<?php } ?>> 不可用</option>
+                             
+                             </select>
+                          </div>
+                           <div class="col-sm-3 control-label" for="ds_host" style="width:auto;float:right;"><button type="submit" class="btn">搜索</button></div>
+                          
+                       </div>
+                    
+                      
+               
+                    
+                    <!--<fieldset>
+                         <legend>选择相关表</legend>
+                        <div class="form-group">
+                           <label for="disabledSelect"  class="col-sm-2 control-label">表名</label>
+                           <div class="col-sm-10">
+                              <select id="disabledSelect" class="form-control">
+                                 <option>禁止选择</option>
+                                 <option>禁止选择</option>
+                              </select>
+                           </div>
+                        </div>
+                    </fieldset>
+                    
+                       <fieldset>
+                         <legend>字段名</legend>
+                        <div class="form-group">
+                           <label for="disabledSelect"  class="col-sm-2 control-label">表名</label>
+                           <div class="col-sm-10">
+                              <select id="disabledSelect" class="form-control">
+                                 <option>禁止选择</option>
+                                 <option>禁止选择</option>
+                              </select>
+                           </div>
+                        </div>
+                    </fieldset>-->
+                </form>
+                </div>
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th style="width:200px;">ID号</th>
+					<th style="width:300px;">订单编号</th>
+                    <th>购货人</th>
+					<th>商品名</th>
+					<th>购买数量</th>
+                    <th>订单金额</th>
+                    <th>下单时间</th>
+                    <th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<notempty name="list">
+				<volist name="list" id="vo">
+				<tr>
+					<td>{$vo.id}</td>
+					<td>{$vo.orderId}</td>
+                    <td>{$vo.app_id}</td>
+					<td>{$vo.goods_name}</td>
+               
+                    <td>{$vo.amount}</td>
+                    <td>{$vo.total_fee}</td>
+					<td>{$vo.ctime}</a></td>
+                    <th><a href="/index.php?s=/Admin/goods/edit/id/{$vo.id}" >编辑</a></th>
+					
+				</tr>
+				</volist>
+				<else/>
+				<td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
+				</notempty>
+			</tbody>
+		</table>
+	</div>
+	<!-- 分页 -->
+    <div class="pagination">
+        {$page}
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+		$("#datetimeStart").datetimepicker({
+    format: 'yyyy-mm-dd',
+    minView:'month',
+    language: 'zh-CN',
+    autoclose:true,
+    startDate:new Date()
+  }).on("click",function(){
+    $("#datetimeStart").datetimepicker("setEndDate",$("#datetimeEnd").val())
+  });
+  $("#datetimeEnd").datetimepicker({
+    format: 'yyyy-mm-dd',
+    minView:'month',
+    language: 'zh-CN',
+    autoclose:true,
+    startDate:new Date()
+  }).on("click",function(){
+    $("#datetimeEnd").datetimepicker("setStartDate",$("#datetimeStart".val()))
+  });
+    </script>
+</block>
+<block name="css">
+<style type="text/css">
+.col-sm-1 {
+    width:auto;
+}
+</style>
+</block>

@@ -1,0 +1,101 @@
+[Sun Sep 24 03:22:02 2017] [notice] Digest: generating secret for digest authentication ...
+[Sun Sep 24 03:22:02 2017] [notice] Digest: done
+[Sun Sep 24 03:22:02 2017] [warn] ./mod_dnssd.c: No services found to register
+[Sun Sep 24 03:22:02 2017] [notice] Apache/2.2.15 (Unix) DAV/2 PHP/5.3.3 configured -- resuming normal operations
+[Mon Sep 25 09:14:07 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 09:36:53 2017] [error] [client 58.247.49.90] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 10:00:00 2017] [error] [client 58.247.49.90] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 11:15:19 2017] [error] [client 58.247.49.90] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 12:28:15 2017] [error] [client 58.247.49.90] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 12:28:15 2017] [error] [client 58.247.49.90] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 13:08:12 2017] [error] [client 58.247.49.90] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 13:08:14 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 13:08:17 2017] [error] [client 192.168.1.247] Directory index forbidden by Options directive: /var/www/html/
+[Mon Sep 25 13:47:42 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 13:47:42 2017] [error] [client 58.247.49.90] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 13:47:59 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 13:47:59 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 14:00:39 2017] [error] [client 192.168.1.247] PHP Warning:  phpinfo(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'Asia/Chongqing' for 'CST/8.0/no DST' instead in /var/www/html/info.php on line 2
+[Mon Sep 25 14:01:03 2017] [error] [client 192.168.1.247] Directory index forbidden by Options directive: /var/www/html/
+[Mon Sep 25 14:10:59 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 14:10:59 2017] [error] [client 58.247.49.90] File does not exist: /var/www/html/favicon.ico
+[Mon Sep 25 14:31:21 2017] [notice] caught SIGTERM, shutting down
+[Mon Sep 25 14:31:22 2017] [notice] SELinux policy enabled; httpd running as context unconfined_u:system_r:httpd_t:s0
+[Mon Sep 25 14:31:22 2017] [notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Mon Sep 25 14:31:22 2017] [notice] Digest: generating secret for digest authentication ...
+[Mon Sep 25 14:31:22 2017] [notice] Digest: done
+[Mon Sep 25 14:31:22 2017] [warn] ./mod_dnssd.c: No services found to register
+[Mon Sep 25 14:31:22 2017] [notice] Apache/2.2.15 (Unix) DAV/2 PHP/5.3.3 configured -- resuming normal operations
+[Mon Sep 25 14:45:09 2017] [error] [client 192.168.1.247] Directory index forbidden by Options directive: /var/www/html/
+[Mon Sep 25 15:20:08 2017] [notice] caught SIGTERM, shutting down
+[Mon Sep 25 15:22:34 2017] [notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Mon Sep 25 15:22:34 2017] [notice] Digest: generating secret for digest authentication ...
+[Mon Sep 25 15:22:34 2017] [notice] Digest: done
+[Mon Sep 25 15:22:35 2017] [notice] Apache/2.2.15 (Unix) DAV/2 PHP/5.3.3 configured -- resuming normal operations
+[Mon Sep 25 15:22:35 2017] [warn] ./mod_dnssd.c: No services found to register
+[Mon Sep 25 15:25:30 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/vr_couponadmin/admin
+[Mon Sep 25 15:25:37 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/vr_couponadmin/admin
+[Mon Sep 25 15:31:56 2017] [notice] caught SIGTERM, shutting down
+[Mon Sep 25 15:31:57 2017] [notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Mon Sep 25 15:31:57 2017] [notice] Digest: generating secret for digest authentication ...
+[Mon Sep 25 15:31:57 2017] [notice] Digest: done
+[Mon Sep 25 15:31:57 2017] [warn] ./mod_dnssd.c: No services found to register
+[Mon Sep 25 15:31:57 2017] [notice] Apache/2.2.15 (Unix) DAV/2 PHP/5.3.3 configured -- resuming normal operations
+[Mon Sep 25 15:32:34 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/vr_couponadmin/admin
+[Mon Sep 25 15:32:38 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/vr_couponadmin/admin
+[Mon Sep 25 15:32:39 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/vr_couponadmin/admin
+[Mon Sep 25 15:32:40 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/vr_couponadmin/admin
+[Mon Sep 25 15:34:44 2017] [notice] caught SIGTERM, shutting down
+[Mon Sep 25 15:34:44 2017] [notice] suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Mon Sep 25 15:34:44 2017] [notice] Digest: generating secret for digest authentication ...
+[Mon Sep 25 15:34:44 2017] [notice] Digest: done
+[Mon Sep 25 15:34:44 2017] [warn] ./mod_dnssd.c: No services found to register
+[Mon Sep 25 15:34:44 2017] [notice] Apache/2.2.15 (Unix) DAV/2 PHP/5.3.3 configured -- resuming normal operations
+[Mon Sep 25 15:34:50 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/vr_couponadmin/admin
+[Mon Sep 25 15:34:51 2017] [error] [client 192.168.1.247] File does not exist: /var/www/html/vr_couponadmin/admin
+[Mon Sep 25 15:36:33 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VirtualcardController.class.php on line 44, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/Index/index.html
+[Mon Sep 25 15:36:33 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/Index/index.html
+[Mon Sep 25 15:36:41 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VirtualcardController.class.php on line 44
+[Mon Sep 25 15:36:41 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15
+[Mon Sep 25 15:37:13 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VirtualcardController.class.php on line 44, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/
+[Mon Sep 25 15:37:13 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/
+[Mon Sep 25 15:37:17 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VirtualcardController.class.php on line 44
+[Mon Sep 25 15:37:17 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15
+[Mon Sep 25 15:38:28 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:38:28 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VirtualcardController.class.php on line 44
+[Mon Sep 25 15:38:28 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15
+[Mon Sep 25 15:38:29 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:38:29 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VirtualcardController.class.php on line 44
+[Mon Sep 25 15:38:29 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15
+[Mon Sep 25 15:38:32 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:38:32 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VirtualcardController.class.php on line 44
+[Mon Sep 25 15:38:32 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15
+[Mon Sep 25 15:38:40 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:38:40 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VirtualcardController.class.php on line 44
+[Mon Sep 25 15:38:40 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15
+[Mon Sep 25 15:38:45 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:38:50 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:38:58 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/
+[Mon Sep 25 15:39:02 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/Config/group.html
+[Mon Sep 25 15:39:02 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VirtualcardController.class.php on line 44, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/Config/group.html
+[Mon Sep 25 15:39:02 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/Config/group.html
+[Mon Sep 25 15:39:05 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/Config/group.html
+[Mon Sep 25 15:39:06 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/Config/group.html
+[Mon Sep 25 15:39:10 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/Config/group.html
+[Mon Sep 25 15:39:10 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VenueController.class.php on line 21, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/Config/group.html
+[Mon Sep 25 15:39:10 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15, referer: http://192.168.1.19/vr_couponadmin/index.php?s=/Admin/Config/group.html
+[Mon Sep 25 15:39:14 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:39:14 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VenueController.class.php on line 21
+[Mon Sep 25 15:39:14 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15
+[Mon Sep 25 15:39:19 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:39:19 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VenueController.class.php on line 21
+[Mon Sep 25 15:39:19 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15
+[Mon Sep 25 15:39:20 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:39:20 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VenueController.class.php on line 21
+[Mon Sep 25 15:39:20 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15
+[Mon Sep 25 15:40:34 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:40:34 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VenueController.class.php on line 21
+[Mon Sep 25 15:40:34 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15
+[Mon Sep 25 15:40:37 2017] [error] [client 192.168.1.247] PHP Notice:  Constant APP_DEBUG already defined in /var/www/html/vr_couponadmin/index.php on line 24
+[Mon Sep 25 15:40:37 2017] [error] [client 192.168.1.247] PHP Fatal error:  Can't use function return value in write context in /var/www/html/vr_couponadmin/Application/Admin/Controller/VenueController.class.php on line 21
+[Mon Sep 25 15:40:37 2017] [error] [client 192.168.1.247] PHP Fatal error:  Class declarations may not be nested in /var/www/html/vr_couponadmin/ThinkPHP/Library/Think/Log.class.php on line 15

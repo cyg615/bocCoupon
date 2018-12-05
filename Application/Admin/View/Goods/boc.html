@@ -1,0 +1,18 @@
+<extend name="Layout/ins_page" />
+<block name="content">
+    <if condition=' ($errorInfo) '>
+        <div>
+            <?php echo $errorInfo;?>
+        </div>
+    </if>
+    <form action="/index.php?m=&c=Order&a=doimportupdatestockofboc365byexcel" onSubmit="return closebut()" method="post" enctype="multipart/form-data">
+        <input type="file" name="import"/>
+        <input type="hidden" name="table" value="tablename"/>
+        <input type="submit" id="aa" value="上传"/>
+    </form>
+    <br>
+    <div><a href="/stock_boc365.xls" target="_blank">模板(2017-11-22)</a></div>
+
+</block>
+<block name="js">
+</block>
