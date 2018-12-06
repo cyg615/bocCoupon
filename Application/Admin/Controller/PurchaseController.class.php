@@ -77,6 +77,8 @@ class PurchaseController extends AdminController
         $outputline='';
         $new_goods=array();
         $batch_no=trim(I('batch_no'));
+        //$chale=substr($batch_no,0,4);
+        //echo $chale;exit;
         $bocconfig['upload'] = DOC_ROOT . $bocconfig['upload'] . "/" . $batch_no . "/";
         $isupload=M('batch_log')->where("batch_no='".$batch_no."'")->find();
         if($isupload['status']==1)
@@ -314,8 +316,9 @@ class PurchaseController extends AdminController
 
             }
         }
-
+        //echo $task;exit;
         exec( $task." 2>&1",$out);//
+        print_r($out);exit;
 
         if($out[0]!='success')
         {
@@ -412,6 +415,7 @@ class PurchaseController extends AdminController
         }
 
         exec( $task." 2>&1",$out);//
+
         if($out[0]=='success')
         {
             exit;

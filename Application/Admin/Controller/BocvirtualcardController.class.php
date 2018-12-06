@@ -14,6 +14,8 @@ class BocvirtualcardController extends AdminController
 {
     //public $baseApi = 'http://39.104.103.212:88/';//测试
     public $baseApi ='http://101.132.131.63:88/';//正式
+    public $productbaseApi ='http://47.93.238.180:9001/';//测试实物兑换券
+
 
     public function index()
     {
@@ -271,8 +273,8 @@ class BocvirtualcardController extends AdminController
 
     }
 
-
-    public function bfshProductexport()
+                   
+    public function bfshProductsexport()
     {
         Vendor('Util.TService');
         Vendor('Util.Crypt3Des');
@@ -306,14 +308,14 @@ class BocvirtualcardController extends AdminController
             mkdir($bocconfig['upload'], 0777, true);
         }
         foreach ($dataList as $key => $val) {
-            $inteface = 'coupon/buy';
+            $inteface = 'coupon/buylocal';
 
-            $data = array('goodsSQ' => $val['sequence'], 'appId' => $platform, 'amount' => $val['buynum'], "outOrderId" => 'BOC' . date('YmdHis') . rand('1000', 9999));
+            $data = array('goodsSQ' => $val['sequence'], 'appId' => 'test', 'amount' => $val['buynum'], "outOrderId" => 'BOC' . date('YmdHis') . rand('1000', 9999));
             //$data['pageSize']=$val['buynum']>500 ? 500: $val['buynum'];
-            $sign = $this->createSign($platform, $data);
+            $sign = $this->createSign('test', $data);
             $data['sign'] = $sign;
 
-            $res = \TService::instance()->requestService($this->baseApi . $inteface, $data);
+            $res = \TService::instance()->requestService($this->productbaseApi . $inteface, $data);
             \Think\Log::write('买券参数：'.json_encode($res),'INFO');
             //print_r($res);exit;
             if ($res['httpCode'] == 200) {
@@ -329,10 +331,10 @@ class BocvirtualcardController extends AdminController
             }
 
             $inteface = 'coupon/querycoupon';
-            $data = array('appId' => $platform, 'orderNo' => $coupon['orderId'], 'page' => 1,'pageSize'=>500);
-            $sign = $this->createSign($platform, $data);
+            $data = array('appId' => 'test', 'orderNo' => $coupon['orderId'], 'page' => 1,'pageSize'=>500);
+            $sign = $this->createSign('test', $data);
             $data['sign'] = $sign;
-            $res = \TService::instance()->requestService($this->baseApi . $inteface, $data);
+            $res = \TService::instance()->requestService($this->productbaseApi . $inteface, $data);
             if ($res['httpCode'] == 200) {
                 $couponArray = $res['data']['couponList'];
                 if(count($couponArray)>0)

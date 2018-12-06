@@ -24,7 +24,7 @@
 					<td>{$vo.batch_no}</td>
                     <td><a href="javascript:void(0);" class="btn_show" batchNO="{$vo.batch_no}" >{$vo.count}</a></td>
                     <td><if condition="$vo.isupload eq 1">已上传<else/>未上传</if></td>
-                    <th><if condition="$vo.isupload lt 1"><a href="{:U('/Admin/BcspGoods/index')}" >增加卡券</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('/Admin/Purchase/bcspexport',array('batch_no'=>$vo['batch_no']))}" >上传银行</a></if></th> 
+                    <th><if condition="$vo.isupload lt 1"><a href="{:U('/Admin/BfshProducts/index')}" >增加卡券</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('/Admin/Purchase/bfshProductsexport',array('batch_no'=>$vo['batch_no']))}" >上传银行</a></if></th> 
                     
                     <!--<th><a href="javasctipt:void(0)"  onclick="submit_goods('{$vo.sequence}')">上传中行</a></th>->
                    
