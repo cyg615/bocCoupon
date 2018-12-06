@@ -595,7 +595,7 @@ class PurchaseController extends AdminController
         $nowPage    = $nowPage>0 ? $nowPage : 1;
 //        $map=1;
 
-        
+
         $table=M('boc_order');
         $nums= $table->where("batch_no like 'BFSW_%'")->field("count(*) as count,batch_no")->group("batch_no")->select();// 查询满足要求的总记录数
         $count=count($nums);
@@ -609,7 +609,7 @@ class PurchaseController extends AdminController
         $show= $Page->show();// 分页显示输出
         // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
         //SELECT COUNT(*) AS total,`batch_no`  FROM  `vrc_boc_order` GROUP  BY `batch_no`
-        $datas=$table->where("batch_no like 'BCSP_%'")->field("count(*) as count,batch_no")->group("batch_no")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        $datas=$table->where("batch_no like 'BFSW_%'")->field("count(*) as count,batch_no")->group("batch_no")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
         foreach($datas as $k=>$v)
         {
             $isupload=M('batch_log')->where("batch_no='".$v['batch_no']."'")->find();
