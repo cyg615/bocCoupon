@@ -318,7 +318,7 @@ class PurchaseController extends AdminController
         }
         //echo $task;exit;
         exec( $task." 2>&1",$out);//
-        print_r($out);exit;
+        //print_r($out);exit;
 
         if($out[0]!='success')
         {
