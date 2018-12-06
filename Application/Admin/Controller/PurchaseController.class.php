@@ -375,7 +375,7 @@ class PurchaseController extends AdminController
         }
         $merchant_pic=DOC_ROOT.'/Uploads/Boccoupon/Merchant/MSHHY00001.png';
 
-        $this->addzip($bocconfig['upload'] . $picFileName. '.ZIP',$merchant_pic,"PSHHY".sprintf('%05s', 1).'.png');
+        $this->addzip($bocconfig['upload'] . $picFileName. '.ZIP',$merchant_pic,"PSHHY".sprintf('%05s', 2).'.png');
         if(file_exists($bocconfig['upload'] .  $picFileName . '.ZIP')) {
             if (PATH_SEPARATOR==':') {
                 $task="cd ". DOC_ROOT . "/Uploads/Boccoupon/Library/" . ";java -jar PgpEncryUtil.jar ". $bocconfig['upload'] . $picFileName . '.ZIP ' . $bocconfig['upload'] .  $picFileName . '.ZIP.DAT ' . DOC_ROOT . "/Uploads/Boccoupon/Cert/dsfpublic.asc";
@@ -399,7 +399,7 @@ class PurchaseController extends AdminController
         //file_put_contents($bocconfig['upload'].$merchantFileName,mb_convert_encoding($merchantputline,'GBK',mb_detect_encoding($merchantputline,array('ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5'))));
         //exit;
         $merchantFileName="MER.SHHY.".date("Ymd").".00.P";
-        $merchantputline= sprintf('%-10s','MSHHY00001')." |#| ".sprintf('%-6s', '310000')." |#| ".sprintf('%-6s', '310100')." |#| ".sprintf('%-6s', '000000')." |#| ".$this->filling_str('海牙湾国际有限公司',200)  ." |#| ".$this->filling_str('海牙湾国际有限公司  G-Town International Limited ',200)  ." |#| ".$this->filling_str('10年来专注客户研究，力求比客户更加了解客户。我们视客户为合作伙伴，共同致力于品牌忠诚度计划解决方案,并实时创造品牌专属衍生品。我们讨厌沉闷，拒绝平庸。多年来专注化妆品、银行行业相关营销采购服务',200) ." |#| ".$this->filling_str('上海市杨浦区政立路415号中航天盛广场A座9楼 ',200) ." |#| ".sprintf('%-20s', '086-021-51696195')  ." |#| ".sprintf('%-100s','')  ." |#| ".sprintf('%-100s', '')  ." |#| ".sprintf('%-50s', '')  ." |#| ".sprintf('%-50s', '') ." |#| ".sprintf('%-10s', "PSHHY".sprintf('%05s', 1)) ." |#| "."Y"." |#| ".sprintf('%-15s', 'MSHHY0000000001') ." |#| "." |#| "." |#| "."\n";
+        $merchantputline= sprintf('%-10s','MSHHY00002')." |#| ".sprintf('%-6s', '000000')." |#| ".sprintf('%-6s', '000000')." |#| ".sprintf('%-6s', '000000')." |#| ".$this->filling_str('海牙湾国际有限公司',200)  ." |#| ".$this->filling_str('海牙湾国际有限公司  G-Town International Limited ',200)  ." |#| ".$this->filling_str('10年来专注客户研究，力求比客户更加了解客户。我们视客户为合作伙伴，共同致力于品牌忠诚度计划解决方案,并实时创造品牌专属衍生品。我们讨厌沉闷，拒绝平庸。多年来专注化妆品、银行行业相关营销采购服务',200) ." |#| ".$this->filling_str('上海市杨浦区政立路415号中航天盛广场A座9楼 ',200) ." |#| ".sprintf('%-20s', '086-021-51696195')  ." |#| ".sprintf('%-100s','')  ." |#| ".sprintf('%-100s', '')  ." |#| ".sprintf('%-50s', '')  ." |#| ".sprintf('%-50s', '') ." |#| ".sprintf('%-10s', "PSHHY".sprintf('%05s', 1)) ." |#| "."Y"." |#| ".sprintf('%-15s', 'MSHHY0000000002') ." |#| "." |#| "." |#| "."\n";
         $merchantputline.='TLRL000000000000001';
         //echo php_uname('s');
         file_put_contents($bocconfig['upload'].$merchantFileName,mb_convert_encoding($merchantputline,'GBK',mb_detect_encoding($merchantputline,array('ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5'))));
