@@ -273,7 +273,7 @@ class BocvirtualcardController extends AdminController
 
     }
 
-                   
+
     public function bfshProductsexport()
     {
         Vendor('Util.TService');
@@ -348,6 +348,7 @@ class BocvirtualcardController extends AdminController
                 $goodsInfo=M('goods g')->where("g.id = '" .$val['id']. "'")->find();
                 $goods_uplod_exis = M('boc_ids')->where("goods_id='" . $val['id'] . "' and expire='" . $goodsInfo['expire'] . "'")->order('id desc')->limit(1)->find();
                 if ($goods_uplod_exis) {
+
                     $goods_code = $goods_uplod_exis['boc_goods_id_code'];
                 } else {
                     $goods_ids = M('boc_ids')->where("goods_id='" . $val['id'] . "'")->order('id desc')->limit(1)->find();
@@ -366,10 +367,11 @@ class BocvirtualcardController extends AdminController
                             'add_time' => date("Y-m-d H:i:s")
                         )
                     );
-
+                    //echo  M('boc_ids')->getLastSql();exit;
                     //$new_goods[]=array('goods_id' => $v['goods_id'], 'goods_code' => $goods_code, 'expire' => $v['expire']);
 
                 }
+
                 $insertData = array(
                     'coupon_sn' => $v['code'],
                     'create_time' => date("Y-m-d H:i:s"),
