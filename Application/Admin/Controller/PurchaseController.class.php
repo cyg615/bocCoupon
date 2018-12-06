@@ -594,6 +594,7 @@ class PurchaseController extends AdminController
         $nowPage    = empty(I('p'))? 1 : intval(I('p'));
         $nowPage    = $nowPage>0 ? $nowPage : 1;
 //        $map=1;
+
         
         $table=M('boc_order');
         $nums= $table->where("batch_no like 'BFSW_%'")->field("count(*) as count,batch_no")->group("batch_no")->select();// 查询满足要求的总记录数
