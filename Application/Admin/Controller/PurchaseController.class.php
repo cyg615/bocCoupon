@@ -595,7 +595,7 @@ class PurchaseController extends AdminController
         $nowPage    = $nowPage>0 ? $nowPage : 1;
 //        $map=1;
         $table=M('boc_order');
-        $nums= $table->where("batch_no like 'BCSP_%'")->field("count(*) as count,batch_no")->group("batch_no")->select();// 查询满足要求的总记录数
+        $nums= $table->where("batch_no like 'BFSW_%'")->field("count(*) as count,batch_no")->group("batch_no")->select();// 查询满足要求的总记录数
         $count=count($nums);
         import("@.ORG.Util.AjaxPage");
         $Page =new \AjaxPage($nowPage,$count,'ajax-page',10);// 实例化分页类 传入总记录数、ajax更新的局部页面ID和每页显示的记录数(10)
