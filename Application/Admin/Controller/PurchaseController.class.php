@@ -293,7 +293,7 @@ class PurchaseController extends AdminController
 
             $goods_uplod_exis=M('boc_ids')->where("boc_goods_id_code='" . $v['boc_goods_id'] . "' and `status`=0")->order('id desc')->limit(1)->find();
             //echo  $goods_uplod_exis;exit;
-            if (!$goods_uplod_exis) {
+            if ($goods_uplod_exis) {
                 $new_goods[]=array('goods_id' => $v['goods_id'], 'goods_code' => $v['boc_goods_id'], 'expire' => date("Y-m-d",$v['expire']));
                 M('boc_ids')->where("goods_id='".$v['goods_id']."'and `boc_goods_id_code`='".$v['boc_goods_id']."'")->save(array('status'=>1));
                 //$goods_code = $goods_uplod_exis['boc_goods_id_code'];
