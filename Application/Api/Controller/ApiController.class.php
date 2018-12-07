@@ -37,7 +37,7 @@ class ApiController extends Controller {
         //$price=I("price");
         $data=array('coupon_sn'=>$coupon_sn,'phone'=>$phone);
 
-        $orderInfo=M("boc_order")->where("coupon_sn='".$this->urlsafe_b64encode(trim($coupon_sn))."' and  platform in('C20123','C20130','C20122')")->find();
+        $orderInfo=M("boc_order")->where("coupon_sn='".$this->urlsafe_b64encode(trim($coupon_sn))."' and  platform in('C20123','C20130','C20122','C200866')")->find();
 
         if(empty($orderInfo))
         {

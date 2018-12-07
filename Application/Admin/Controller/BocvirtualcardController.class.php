@@ -14,7 +14,7 @@ class BocvirtualcardController extends AdminController
 {
     //public $baseApi = 'http://39.104.103.212:88/';//测试
     public $baseApi ='http://101.132.131.63:88/';//正式
-    public $productbaseApi ='http://47.93.238.180:9001/';//测试实物兑换券 
+    public $productbaseApi ='http://47.93.238.180:9001/';//正式实物兑换券
 
 
     public function index()
