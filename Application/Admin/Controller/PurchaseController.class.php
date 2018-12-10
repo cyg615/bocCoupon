@@ -329,7 +329,8 @@ class PurchaseController extends AdminController
         $goodsFileName="WARES.SHHY.".date("Ymd").".00.P";
         $picFileName="PIC.SHHY.".date("Ymd").".00.P";
         $goodsoutputline='';
-
+        echo "<pre>";
+        print_r($new_goods);
         foreach($new_goods  as $k=>$v)
         {
             $goodsInfo=M('goods g')->where("g.id = '" .$v['goods_id']. "'")->field("g.id as goods_id,g.name,g.price,g.integral,g.pic_url,g.expire,g.type,g.description1,g.description2,g.description3,g.description4,g.description5,g.description6,g.description7,g.description8,g.description9,g.description10")->find();
@@ -351,6 +352,7 @@ class PurchaseController extends AdminController
 
         }
         $goodsoutputline.='TLRL'. sprintf('%015s', count($new_goods));
+        echo $goodsoutputline;
 
         file_put_contents($bocconfig['upload'].$goodsFileName,mb_convert_encoding($goodsoutputline,'GBK',mb_detect_encoding($goodsoutputline,array('ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5'))));
 
