@@ -57,7 +57,7 @@ class ApiController extends Controller {
         //try{
             unset($data['coupon_sn']);
             M("boc_order")->where("coupon_sn='".$this->urlsafe_b64encode(trim($coupon_sn))."'")->save($data);
-            if($status==1 &&  ($orderInfo['platform']=="C20122" || $orderInfo['platform']=="C20130"  || $orderInfo['platform']=='C200866'))
+            if($status==1 &&  ($orderInfo['platform']=="C20122" || $orderInfo['platform']=="C20130"  || $orderInfo['platform']=='C20054'))
             {
                 $json_array=array(
                     "waresId"=> "WSHHY".$orderInfo['boc_goods_id'],
@@ -118,7 +118,7 @@ class ApiController extends Controller {
 
     public function syncToBoc()
     {
-        $arr=M('boc_order')->where(" use_status=1 and syns_status=0 and platform in('C20130','C20122') ")->limit(100)->select();
+        $arr=M('boc_order')->where(" use_status=1 and syns_status=0 and platform in('C20130','C20122','C20054') ")->limit(100)->select();
 
         //$coupons="";
         foreach($arr as $k=>$v) {

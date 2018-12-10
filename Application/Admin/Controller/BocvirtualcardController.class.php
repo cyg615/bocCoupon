@@ -280,7 +280,7 @@ class BocvirtualcardController extends AdminController
         Vendor('Util.Crypt3Des');
         //if ($opmode == "buy") {
         //$platform=trim(I('platform'));
-        $platform="C200866";
+        $platform="C20054";
         $numList = trim(I('numList'));
         $goodList = trim(I('goodList'));
         $goodList = mb_convert_encoding($goodList, 'UTF-8', mb_detect_encoding($goodList, array('ASCII', 'GB2312', 'GBK', 'BIG5', 'UTF-8')));
@@ -310,9 +310,9 @@ class BocvirtualcardController extends AdminController
         foreach ($dataList as $key => $val) {
             $inteface = 'coupon/buylocal';
 
-            $data = array('goodsSQ' => $val['sequence'], 'appId' => 'test', 'amount' => $val['buynum'], "outOrderId" => 'BOC' . date('YmdHis') . rand('1000', 9999));
+            $data = array('goodsSQ' => $val['sequence'], 'appId' => 'C20054', 'amount' => $val['buynum'], "outOrderId" => 'BOC' . date('YmdHis') . rand('1000', 9999));
             //$data['pageSize']=$val['buynum']>500 ? 500: $val['buynum'];
-            $sign = $this->createSign('test', $data);
+            $sign = $this->createSign('C20054', $data);
             $data['sign'] = $sign;
 
             $res = \TService::instance()->requestService($this->productbaseApi . $inteface, $data);
@@ -331,8 +331,8 @@ class BocvirtualcardController extends AdminController
             }
 
             $inteface = 'coupon/querycoupon';
-            $data = array('appId' => 'test', 'orderNo' => $coupon['orderId'], 'page' => 1,'pageSize'=>500);
-            $sign = $this->createSign('test', $data);
+            $data = array('appId' => 'C20054', 'orderNo' => $coupon['orderId'], 'page' => 1,'pageSize'=>500);
+            $sign = $this->createSign('C20054', $data);
             $data['sign'] = $sign;
             $res = \TService::instance()->requestService($this->productbaseApi . $inteface, $data);
             if ($res['httpCode'] == 200) {
