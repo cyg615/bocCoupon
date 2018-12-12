@@ -21,7 +21,17 @@ class ApiController extends Controller {
      * 退货信息接口
      */
     public function index(){
-       echo 9999;exit;
+        \Think\Log::write('请求Url：'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],'INFO');
+        $res=array('stat'=>00,'result'=>'退货成功');
+        $orderId = trim(I('orderId'));
+        $waresId=trim(I('waresId'));
+        $wInfo=trim(I('wInfo'));
+        $returnDate=trim(I('returnDate'));
+        $returnTime=trim(I('returnTime'));
+        $model = M("boc_order");
+        $model->where('coupon_sn='.base64_encode($wInfo))->save(array('status'=>2,'out_order_sn'=>$orderId,'return_time'=>date('Y-m-d', strtotime(trim($returnDate)))." ".trim($returnTime)));
+        $res['date']=date("Y-m-d H:i:s");
+        echo json_encode($res);exit;
     }
     /*
    * 卡券已使用更新接口
@@ -57,7 +67,8 @@ class ApiController extends Controller {
         //try{
             unset($data['coupon_sn']);
             M("boc_order")->where("coupon_sn='".$this->urlsafe_b64encode(trim($coupon_sn))."'")->save($data);
-            if($status==1 &&  ($orderInfo['platform']=="C20122" || $orderInfo['platform']=="C20130"  || $orderInfo['platform']=='C20054'))
+        if($status==1 &&  ($orderInfo['platform']=="C20122" || $orderInfo['platform']=="C20130"  || $orderInfo['platform']=='C20054'))
+           // if($status==1 &&  ($orderInfo['platform']=="C20122" || $orderInfo['platform']=="C20130"  || $orderInfo['platform']=='C20054'))
             {
                 $json_array=array(
                     "waresId"=> "WSHHY".$orderInfo['boc_goods_id'],

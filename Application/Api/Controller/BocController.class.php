@@ -18,6 +18,7 @@ class BocController extends Controller {
 
 	//系统首页
     public function returnapi(){
+        \Think\Log::write('请求Url：'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],'INFO');
         $res=array('stat'=>00,'result'=>'退货成功');
         $orderId = trim(I('orderId'));
         $waresId=trim(I('waresId'));
