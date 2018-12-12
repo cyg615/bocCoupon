@@ -29,6 +29,7 @@ class BocController extends Controller {
         $model = M("boc_order");
         $model->where('coupon_sn='.base64_encode($wInfo))->save(array('status'=>2,'out_order_sn'=>$orderId,'return_time'=>date('Y-m-d', strtotime(trim($returnDate)))." ".trim($returnTime)));
         $res['date']=date("Y-m-d H:i:s");
+        \Think\Log::write('响应参数：'.json_encode($res),'INFO');
         echo json_encode($res);exit;
     }
 }
