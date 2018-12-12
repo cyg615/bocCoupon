@@ -26,6 +26,7 @@ class ApiController extends Controller {
         $orderId = trim(I('orderId'));
         $waresId=trim(I('waresId'));
         $wInfo=trim(I('wInfo'));
+        \Think\Log::write('券码：'.$wInfo);
         $returnDate=trim(I('returnDate'));
         $returnTime=trim(I('returnTime'));
         $model = M("boc_order");

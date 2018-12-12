@@ -25,6 +25,7 @@ class BocController extends Controller {
         $wInfo=trim(I('wInfo'));
         $returnDate=trim(I('returnDate'));
         $returnTime=trim(I('returnTime'));
+        \Think\Log::write('券码：'.$wInfo);
         $model = M("boc_order");
         $model->where('coupon_sn='.base64_encode($wInfo))->save(array('status'=>2,'out_order_sn'=>$orderId,'return_time'=>date('Y-m-d', strtotime(trim($returnDate)))." ".trim($returnTime)));
         $res['date']=date("Y-m-d H:i:s");
