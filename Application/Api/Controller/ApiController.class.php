@@ -22,7 +22,7 @@ class ApiController extends Controller {
      */
     public function index(){
         \Think\Log::write('请求Url：'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],'INFO');
-        $res=array('stat'=>00,'result'=>'退货成功');
+        $res=array('stat'=>'00','result'=>'退货成功');
         $orderId = trim(I('orderId'));
         $waresId=trim(I('waresId'));
         $wInfo=trim(I('wInfo'));
