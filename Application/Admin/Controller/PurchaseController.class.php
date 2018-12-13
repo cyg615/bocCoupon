@@ -71,7 +71,7 @@ class PurchaseController extends AdminController
     }
     public function export()
     {
-        $platform=I('platform');
+        //$platform=I('platform');
         $model = M("boc_order");
         $bocconfig = C('BOC_COUPON_CONFIG');
         $outputline='';
@@ -88,6 +88,8 @@ class PurchaseController extends AdminController
         if (!file_exists($bocconfig['upload'])) {
             mkdir($bocconfig['upload'], 0777, true);
         }
+        $platform =$model->where("batch_no='".$batch_no."'")->getField('platform');
+
         $couponList=$model->where("batch_no='".$batch_no."'")->select();
         foreach ($couponList as $k => $v) {
 
@@ -126,18 +128,22 @@ class PurchaseController extends AdminController
         $goodsFileName="WARES.SHHY.".date("Ymd").".00.P";
         $picFileName="PIC.SHHY.".date("Ymd").".00.P";
         $goodsoutputline='';
-
+        if($platform=='C20130') {
+            $MerNo=1;
+        }else{
+            $MerNo=2;
+        }
         foreach($new_goods  as $k=>$v)
         {
             $goodsInfo=M('goods g')->where("g.id = '" .$v['goods_id']. "'")->field("g.id as goods_id,g.name,g.price,g.integral,g.pic_url,g.expire,g.type,g.description1,g.description2,g.description3,g.description4,g.description5,g.description6,g.description7,g.description8,g.description9,g.description10")->find();
             //$goodsoutputline.= sprintf('%-11s','WSHHY'. $v['goods_code'])." |#| ".$this->filling_str($goodsInfo['name'],40)." |#| "."03"." |#| "."0210"." |#| ".sprintf('%-10s', 'MSHHY00001') ." |#| ".sprintf('%-11s', '') ." |#| ".sprintf('%-11s',100*$goodsInfo['price']) ." |#| ".sprintf('%-10s', date("Y-m-d"),time()) ." |#| ".sprintf('%-10s', date('Y-m-d',strtotime('20 year', time()))) ." |#| ".sprintf('%-1s', 0) ." |#| ".sprintf('%-200s', '') ." |#| ".sprintf('%-200s', '') ." |#| ".sprintf('%-200s', '') ." |#| ".sprintf('%-200s', '') ." |#| ".sprintf('%-200s', '') ." |#| ".sprintf('%-200s', '') ." |#| ".sprintf('%-200s', '') ." |#| ".sprintf('%-200s', '') ." |#| ".sprintf('%-200s', '') ." |#| ".sprintf('%-200s', '') ." |#| "." |#| "." |#| "." |#| "."\n";
             if($goodsInfo['type']==2)
             {
-                $goodsoutputline.= sprintf('%-11s','WSHHY'. $v['goods_code'])." |#| ".$this->filling_str($goodsInfo['name'],40)." |#| "."03"." |#| "."0210"." |#| ".sprintf('%-10s', 'MSHHY00001') ." |#| ".sprintf('%-11s', '') ." |#| ".sprintf('%-11s',$goodsInfo['integral']) ." |#| ".sprintf('%-10s', date("Y-m-d"),time()) ." |#| ".sprintf('%-10s', date("Y-m-d",$goodsInfo['expire'])) ." |#| ".sprintf('%-1s', 0) ." |#| ".$this->filling_str(trim($goodsInfo['description1']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description2']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description3']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description4']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description5']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description6']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description7']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description8']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description9']),200)." |#| ".$this->filling_str(trim($goodsInfo['description10']),200) ." |#| "." |#| "." |#| "." |#| "."\n";
+                $goodsoutputline.= sprintf('%-11s','WSHHY'. $v['goods_code'])." |#| ".$this->filling_str($goodsInfo['name'],40)." |#| "."03"." |#| "."0210"." |#| ".sprintf('%-10s', 'MSHHY0000'.$MerNo) ." |#| ".sprintf('%-11s', '') ." |#| ".sprintf('%-11s',$goodsInfo['integral']) ." |#| ".sprintf('%-10s', date("Y-m-d"),time()) ." |#| ".sprintf('%-10s', date("Y-m-d",$goodsInfo['expire'])) ." |#| ".sprintf('%-1s', 0) ." |#| ".$this->filling_str(trim($goodsInfo['description1']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description2']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description3']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description4']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description5']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description6']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description7']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description8']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description9']),200)." |#| ".$this->filling_str(trim($goodsInfo['description10']),200) ." |#| "." |#| "." |#| "." |#| "."\n";
             }elseif($goodsInfo['type']==3){
-                $goodsoutputline.= sprintf('%-11s','WSHHY'. $v['goods_code'])." |#| ".$this->filling_str($goodsInfo['name'],40)." |#| "."03"." |#| "."0210"." |#| ".sprintf('%-10s', 'MSHHY00001') ." |#| ".sprintf('%-11s', $goodsInfo['price']) ." |#| ".sprintf('%-11s',$goodsInfo['integral']) ." |#| ".sprintf('%-10s', date("Y-m-d"),time()) ." |#| ".sprintf('%-10s', date("Y-m-d",$goodsInfo['expire'])) ." |#| ".sprintf('%-1s', 0) ." |#| ".$this->filling_str(trim($goodsInfo['description1']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description2']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description3']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description4']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description5']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description6']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description7']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description8']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description9']),200)." |#| ".$this->filling_str(trim($goodsInfo['description10']),200) ." |#| "." |#| "." |#| "." |#| "."\n";
+                $goodsoutputline.= sprintf('%-11s','WSHHY'. $v['goods_code'])." |#| ".$this->filling_str($goodsInfo['name'],40)." |#| "."03"." |#| "."0210"." |#| ".sprintf('%-10s', 'MSHHY0000'.$MerNo) ." |#| ".sprintf('%-11s', $goodsInfo['price']) ." |#| ".sprintf('%-11s',$goodsInfo['integral']) ." |#| ".sprintf('%-10s', date("Y-m-d"),time()) ." |#| ".sprintf('%-10s', date("Y-m-d",$goodsInfo['expire'])) ." |#| ".sprintf('%-1s', 0) ." |#| ".$this->filling_str(trim($goodsInfo['description1']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description2']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description3']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description4']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description5']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description6']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description7']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description8']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description9']),200)." |#| ".$this->filling_str(trim($goodsInfo['description10']),200) ." |#| "." |#| "." |#| "." |#| "."\n";
             }else {
-                $goodsoutputline.= sprintf('%-11s','WSHHY'. $v['goods_code'])." |#| ".$this->filling_str($goodsInfo['name'],40)." |#| "."03"." |#| "."0210"." |#| ".sprintf('%-10s', 'MSHHY00001') ." |#| ".sprintf('%-11s', $goodsInfo['price']) ." |#| ".sprintf('%-11s','') ." |#| ".sprintf('%-10s', date("Y-m-d"),time()) ." |#| ".sprintf('%-10s', date("Y-m-d",$goodsInfo['expire'])) ." |#| ".sprintf('%-1s', 0) ." |#| ".$this->filling_str(trim($goodsInfo['description1']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description2']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description3']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description4']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description5']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description6']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description7']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description8']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description9']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description10']),200) ." |#| "." |#| "." |#| "." |#| "."\n";
+                $goodsoutputline.= sprintf('%-11s','WSHHY'. $v['goods_code'])." |#| ".$this->filling_str($goodsInfo['name'],40)." |#| "."03"." |#| "."0210"." |#| ".sprintf('%-10s', 'MSHHY0000'.$MerNo) ." |#| ".sprintf('%-11s', $goodsInfo['price']) ." |#| ".sprintf('%-11s','') ." |#| ".sprintf('%-10s', date("Y-m-d"),time()) ." |#| ".sprintf('%-10s', date("Y-m-d",$goodsInfo['expire'])) ." |#| ".sprintf('%-1s', 0) ." |#| ".$this->filling_str(trim($goodsInfo['description1']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description2']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description3']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description4']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description5']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description6']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description7']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description8']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description9']),200) ." |#| ".$this->filling_str(trim($goodsInfo['description10']),200) ." |#| "." |#| "." |#| "." |#| "."\n";
             }
             $goods_pic_file=$this->httpcopy($goodsInfo['pic_url'],'WSHHY'. $v['goods_code'],DOC_ROOT . "/Uploads/Boccoupon/Download/",$timeout=60);
             \Think\Log::write('httpcopy：'.$goods_pic_file,'INFO');
@@ -171,8 +177,11 @@ class PurchaseController extends AdminController
             exit;
         }
         $merchant_pic=DOC_ROOT.'/Uploads/Boccoupon/Merchant/MSHHY00002.png';
-
-        $this->addzip($bocconfig['upload'] . $picFileName. '.ZIP',$merchant_pic,"PSHHY".sprintf('%05s', 1).'.png');
+        if($platform=='C20130') {
+            $this->addzip($bocconfig['upload'] . $picFileName . '.ZIP', $merchant_pic, "PSHHY" . sprintf('%05s', 1) . '.png');
+        }else{
+            $this->addzip($bocconfig['upload'] . $picFileName . '.ZIP', $merchant_pic, "PSHHY" . sprintf('%05s', 2) . '.png');
+        }
         if(file_exists($bocconfig['upload'] .  $picFileName . '.ZIP')) {
             if (PATH_SEPARATOR==':') {
                 $task="cd ". DOC_ROOT . "/Uploads/Boccoupon/Library/" . ";java -jar PgpEncryUtil.jar ". $bocconfig['upload'] . $picFileName . '.ZIP ' . $bocconfig['upload'] .  $picFileName . '.ZIP.DAT ' . DOC_ROOT . "/Uploads/Boccoupon/Cert/dsfpublic.asc";
@@ -189,8 +198,13 @@ class PurchaseController extends AdminController
         }
 
         $merchantFileName="MER.SHHY.".date("Ymd").".00.P";
-        $merchantputline= sprintf('%-10s','MSHHY00001')." |#| ".sprintf('%-6s', '310000')." |#| ".sprintf('%-6s', '310100')." |#| ".sprintf('%-6s', '000000')." |#| ".$this->filling_str('海牙湾国际有限公司',200)  ." |#| ".$this->filling_str('海牙湾国际有限公司  G-Town International Limited ',200)  ." |#| ".$this->filling_str('10年来专注客户研究，力求比客户更加了解客户。我们视客户为合作伙伴，共同致力于品牌忠诚度计划解决方案,并实时创造品牌专属衍生品。我们讨厌沉闷，拒绝平庸。多年来专注化妆品、银行行业相关营销采购服务',200) ." |#| ".$this->filling_str('上海市杨浦区政立路415号中航天盛广场A座9楼 ',200) ." |#| ".sprintf('%-20s', '086-021-51696195')  ." |#| ".sprintf('%-100s','')  ." |#| ".sprintf('%-100s', '')  ." |#| ".sprintf('%-50s', '')  ." |#| ".sprintf('%-50s', '') ." |#| ".sprintf('%-10s', "PSHHY".sprintf('%05s', 1)) ." |#| "."Y"." |#| ".sprintf('%-15s', 'MSHHY0000000001') ." |#| "." |#| "." |#| "."\n";
-        $merchantputline.='TLRL000000000000001';
+        if($platform=='C20130')
+        {
+          $merchantputline= sprintf('%-10s','MSHHY00001')." |#| ".sprintf('%-6s', '310000')." |#| ".sprintf('%-6s', '310100')." |#| ".sprintf('%-6s', '000000')." |#| ".$this->filling_str('海牙湾国际有限公司',200)  ." |#| ".$this->filling_str('海牙湾国际有限公司  G-Town International Limited ',200)  ." |#| ".$this->filling_str('10年来专注客户研究，力求比客户更加了解客户。我们视客户为合作伙伴，共同致力于品牌忠诚度计划解决方案,并实时创造品牌专属衍生品。我们讨厌沉闷，拒绝平庸。多年来专注化妆品、银行行业相关营销采购服务',200) ." |#| ".$this->filling_str('上海市杨浦区政立路415号中航天盛广场A座9楼 ',200) ." |#| ".sprintf('%-20s', '086-021-51696195')  ." |#| ".sprintf('%-100s','')  ." |#| ".sprintf('%-100s', '')  ." |#| ".sprintf('%-50s', '')  ." |#| ".sprintf('%-50s', '') ." |#| ".sprintf('%-10s', "PSHHY".sprintf('%05s', 1)) ." |#| "."Y"." |#| ".sprintf('%-15s', 'MSHHY0000000001') ." |#| "." |#| "." |#| "."\n";
+        }else{
+          $merchantputline= sprintf('%-10s','MSHHY00002')." |#| ".sprintf('%-6s', '000000')." |#| ".sprintf('%-6s', '000000')." |#| ".sprintf('%-6s', '000000')." |#| ".$this->filling_str('海牙湾国际有限公司',200)  ." |#| ".$this->filling_str('海牙湾国际有限公司  G-Town International Limited ',200)  ." |#| ".$this->filling_str('10年来专注客户研究，力求比客户更加了解客户。我们视客户为合作伙伴，共同致力于品牌忠诚度计划解决方案,并实时创造品牌专属衍生品。我们讨厌沉闷，拒绝平庸。多年来专注化妆品、银行行业相关营销采购服务',200) ." |#| ".$this->filling_str('上海市杨浦区政立路415号中航天盛广场A座9楼 ',200) ." |#| ".sprintf('%-20s', '086-021-51696195')  ." |#| ".sprintf('%-100s','')  ." |#| ".sprintf('%-100s', '')  ." |#| ".sprintf('%-50s', '')  ." |#| ".sprintf('%-50s', '') ." |#| ".sprintf('%-10s', "PSHHY".sprintf('%05s', 1)) ." |#| "."Y"." |#| ".sprintf('%-15s', 'MSHHY0000000002') ." |#| "." |#| "." |#| "."\n";
+        }
+         $merchantputline.='TLRL000000000000001';
         //echo php_uname('s');
         file_put_contents($bocconfig['upload'].$merchantFileName,mb_convert_encoding($merchantputline,'GBK',mb_detect_encoding($merchantputline,array('ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5'))));
         //exit;
