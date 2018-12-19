@@ -28,6 +28,7 @@ class IndexController extends Controller {
         $res=array('stat'=>00,'result'=>'');
         $bocconfig=C('BOC_COUPON_CONFIG');
         $bocconfig['upload']=DOC_ROOT.$bocconfig['upload'];
+        $couponApidb = new \Mysql('101.132.131.63','gtown','admin123','couponApi');
         //$data=trim(I('data'));
         $data=trim($_GET['data']);
 //        \Think\Log::write('server：'.json_encode($_SERVER));
@@ -74,6 +75,8 @@ class IndexController extends Controller {
                             $res['result']='Return success';
                             $model->where("coupon_sn='".base64_encode($parms['wInfo'])."'")->save(array('status'=>2,'out_order_sn'=>$parms['orderId'],'lastupdate_time'=>date('Y-m-d', strtotime(trim($parms['returnDate'])))." ".trim($parms['returnTime'])));
                             M('goods')->where("`id` ='".$order['goods_id'] ."'")->setInc('stock',1);
+                            $upsql="UPDATE  `couponApi`  SET `cstatus`=-1  WHERE  coupon='".$this->urlsafe_b64encode($parms['wInfo'])."' ";
+                            $couponApidb->query($upsql);
                         }else{
                             $res['stat']=99;
                             $res['result']='Card voucher has been used';
