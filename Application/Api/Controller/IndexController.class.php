@@ -77,7 +77,8 @@ class IndexController extends Controller {
                             $res['result']='Return success';
                             $model->where("coupon_sn='".base64_encode($parms['wInfo'])."'")->save(array('status'=>2,'out_order_sn'=>$parms['orderId'],'lastupdate_time'=>date('Y-m-d', strtotime(trim($parms['returnDate'])))." ".trim($parms['returnTime'])));
                             M('goods')->where("`id` ='".$order['goods_id'] ."'")->setInc('stock',1);
-                            $upsql="UPDATE  `couponApi`  SET `cstatus`=-1  WHERE  coupon='".$this->urlsafe_b64encode($parms['wInfo'])."' ";
+                            $upsql="UPDATE  `vrc_coupons`  SET `cstatus`=-1  WHERE  coupon='".$this->urlsafe_b64encode($parms['wInfo'])."' ";
+
                             $couponApidb->query($upsql);
                         }else{
                             $res['stat']=99;
