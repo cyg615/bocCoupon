@@ -9,6 +9,7 @@
 
 namespace Api\Controller;
 use Think\Controller;
+//use Vendor\Util\Mysql;
 
 /*
  *
@@ -28,6 +29,7 @@ class IndexController extends Controller {
         $res=array('stat'=>00,'result'=>'');
         $bocconfig=C('BOC_COUPON_CONFIG');
         $bocconfig['upload']=DOC_ROOT.$bocconfig['upload'];
+        Vendor('Util.Mysql');
         $couponApidb = new \Mysql('101.132.131.63','gtown','admin123','couponApi');
         //$data=trim(I('data'));
         $data=trim($_GET['data']);
