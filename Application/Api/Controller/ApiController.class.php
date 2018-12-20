@@ -144,7 +144,7 @@ class ApiController extends Controller {
 
     public function syncToBoc()
     {
-        $arr=M('boc_order')->where(" use_status=1 and syns_status=0 and platform in('C20130','C20122','C20054') ")->limit(100)->select();
+        $arr=M('boc_order')->where(" use_status=1 and syns_status=0 and  and `status`!=2 platform in('C20130','C20122','C20054') ")->limit(100)->select();
 
         //$coupons="";
         foreach($arr as $k=>$v) {
@@ -192,6 +192,7 @@ class ApiController extends Controller {
 
 
         }
+        exit;
 
     }
 
