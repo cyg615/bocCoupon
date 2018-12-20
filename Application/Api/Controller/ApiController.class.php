@@ -147,6 +147,7 @@ class ApiController extends Controller {
         $arr=M('boc_order')->where(" use_status=1 and syns_status=0 and  and `status`!=2 platform in('C20130','C20122','C20054') ")->limit(100)->select();
 
         //$coupons="";
+        print_r($arr);
         foreach($arr as $k=>$v) {
 
                 $json_array = array(
