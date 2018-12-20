@@ -79,7 +79,11 @@ class IndexController extends Controller {
                             M('goods')->where("`id` ='".$order['goods_id'] ."'")->setInc('stock',1);
                             $upsql="UPDATE  `vrc_coupons`  SET `cstatus`=-1  WHERE  coupon='".$this->urlsafe_b64encode($parms['wInfo'])."' ";
 
-                            $couponApidb->query($upsql);
+                            if(!$couponApidb->query($upsql))
+                            {
+                                $res['stat']=99;
+                                $res['result']='modfiy card cancle faild';
+                            }
                         }else{
                             $res['stat']=99;
                             $res['result']='Card voucher has been used';
