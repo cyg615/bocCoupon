@@ -100,11 +100,11 @@ function ajax_show(id,pgae){
 	var status=$("select[name='status']").val();
 	var type=$("select[name='type']").val();
 	$.ajax({
-		url:"{:U('/Admin/goods/index')}",
+		url:"{:U('/Admin/Purchase/index')}",
 		type:"post",
 		async:false,
 		dataType:"text",
-		data:{'p':pgae,'name':name,'sequence':sequence,'status':status,'type':type},
+		data:{'p':pgae},
 		success:function(data){
 		$("#"+id).html(data);
 		},
